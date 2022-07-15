@@ -60,23 +60,23 @@ const int LIMINE_TERMINAL_FULL_REFRESH = ((int)(-4));
 struct Limine_terminal {
     ulong columns;
     ulong rows;
-    ulong framebuffer;
+    ulong* framebuffer;
 }
 
-define Limine_terminal_write = fn void(Limine_terminal, char*, ulong);
+define Limine_terminal_write = fn void(Limine_terminal*, char*, ulong);
 define Limine_terminal_callback = fn void(Limine_terminal, ulong, ulong, ulong, ulong);
 
 struct Limine_terminal_response {
     ulong revision;
     ulong terminal_count;
-    Limine_terminal[] terminals;
+    Limine_terminal* terminals;
     Limine_terminal_write write;
 }
 
 struct Limine_terminal_request {
     ulong[4] id;
     ulong revision;
-    Limine_terminal_response response;
-    ulong callback;
+    Limine_terminal_response* response;
+    Limine_terminal_callback callback;
 }
 

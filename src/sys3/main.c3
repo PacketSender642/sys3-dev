@@ -1,14 +1,11 @@
 module sys3;
 
-import std::boot::limine;
-
 fn void _start()
 {
+    io::new();
+    io::printf("Hello, World, from c3 of course\n");
 
-    print("Hello, World, from c3 of course");
-
-    for (;;) {
-        hlt();
+    while (true) {
+        asm("hlt");
     }
-
 }

@@ -3,14 +3,13 @@ C3C=c3c
 SRCS=$(wildcard src/sys3/*.c3)
 
 all: $(SRCS)
-	gcc -c src/sys3/hlt.c -nostdlib -ffreestanding -o hlt.o
 	$(C3C) compile-only --stdlib lib/ $^ --target elf-x64 -o sys3.o
 
 	ld    				   	   \
 		-Tlinker.ld            \
 		-nostdlib              \
 		-zmax-page-size=0x1000 \
-		-static hlt.o std.boot.limine.o std.core.builtin.o sys3.o -o sys3.elf
+		-static std.core.string.o std.core.io.o std.boot.limine.o std.core.builtin.o sys3.o -o sys3.elf
 
 iso: all
 	make -C limine
